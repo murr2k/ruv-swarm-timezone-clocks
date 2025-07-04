@@ -1,0 +1,9 @@
+@echo off
+echo Starting 24 Timezone Analog Clocks Application...
+echo.
+echo Installing required packages...
+pip install -r requirements.txt
+echo.
+echo Starting application...
+python main.py
+pause

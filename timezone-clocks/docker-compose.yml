@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  timezone-clocks:
+    build: .
+    container_name: timezone-clocks-app
+    volumes:
+      # Mount X11 socket for GUI display (Linux)
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    environment:
+      - DISPLAY=${DISPLAY}
+      - XAUTHORITY=/tmp/.Xauthority
+    network_mode: host
+    # For GUI apps, we need to share the host's display
+    stdin_open: true
+    tty: true
+    
+  # Alternative web-based version (headless)
+  timezone-clocks-web:
+    build: .
+    container_name: timezone-clocks-web
+    ports:
+      - "8000:8000"
+    command: python -m http.server 8000
+    profiles:
+      - web
